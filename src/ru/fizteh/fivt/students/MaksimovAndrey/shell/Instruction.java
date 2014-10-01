@@ -1,16 +1,18 @@
 package ru.fizteh.fivt.students.MaksimovAndrey.shell;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 abstract public class Instruction
 {
     protected String NameOfInstruction;
-    //protected int Number;
+    protected static Path PresentDirectory = Paths.get("").toAbsolutePath().normalize();
 
-    abstract public boolean StartNeedInstruction(String[] arguments); //We will override this class
-/*
+    abstract public boolean StartNeedInstruction(String[] arguments);
+
     @Override
     final public String toString()
     {
         return NameOfInstruction;
     }
-*/
 }

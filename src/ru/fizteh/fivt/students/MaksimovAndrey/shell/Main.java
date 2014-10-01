@@ -6,7 +6,7 @@ public class Main
     {
         Shell WShell = new Shell();
 
-        boolean Check = false;
+        boolean Check = true;
 
         if(args.length != 0)
         {
