@@ -31,6 +31,16 @@ public class Cp extends Instruction {
 
     @Override
     public boolean startNeedInstruction(String[] arguments) {
+
+        if (arguments.length == 1) {
+            System.out.println("ERROR: Missing source and destination operand");
+            System.exit(1);
+        }
+        if (arguments.length == 2) {
+            System.out.println("ERROR: Missing destination operand");
+            System.exit(1);
+        }
+
         boolean isRecursive = (arguments.length >= 4) && (arguments[1].equals(recursiveFlag));
 
         String sourceFileName;

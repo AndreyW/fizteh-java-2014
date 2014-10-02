@@ -13,6 +13,12 @@ public class Cat extends Instruction {
 
     @Override
     public boolean startNeedInstruction(String[] arguments) {
+        
+        if (arguments.length == 1) {
+            System.out.println("ERROR: Missing operand");
+            System.exit(1);
+        }
+
         String fileName = arguments[1];
         Path needPath = Paths.get(fileName);
 

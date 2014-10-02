@@ -34,6 +34,12 @@ public class Rm extends Instruction {
 
     @Override
     public boolean startNeedInstruction(String[] arguments) {
+
+        if (arguments.length == 1) {
+            System.out.println("ERROR: Missing operand");
+            System.exit(1);
+        }
+
         boolean isRecursive = (arguments.length >= 3) && (arguments[1].equals(recursiveFlag));
         String fileName;
         if (isRecursive) {

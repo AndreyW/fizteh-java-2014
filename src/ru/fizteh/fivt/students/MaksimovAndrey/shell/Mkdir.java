@@ -14,6 +14,12 @@ public class Mkdir extends Instruction {
 
     @Override
     public boolean startNeedInstruction(String[] arguments) {
+
+       if (arguments.length == 1) {
+                System.out.println("ERROR: Missing operand");
+                System.exit(1);
+            }
+
         Path needPath = Paths.get(presentDirectory.toString(), arguments[1]).toAbsolutePath().normalize();
         try {
             Files.createDirectory(needPath);

@@ -31,6 +31,15 @@ public class Mv extends Instruction {
     @Override
     public boolean startNeedInstruction(String[] arguments) {
 
+        if (arguments.length == 1) {
+            System.out.println("ERROR: Missing source and destination operand");
+            System.exit(1);
+        }
+        if (arguments.length == 2) {
+            System.out.println("ERROR: Missing destination operand");
+            System.exit(1);
+        }
+
         String sourceFileName = arguments[1];
         String destinationFileName = arguments[2];
 
