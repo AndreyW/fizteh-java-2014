@@ -7,24 +7,17 @@ import java.io.IOException;
 
 
 
-public class Mkdir extends Instruction
-{
-    public Mkdir()
-    {
+public class Mkdir extends Instruction {
+    public Mkdir() {
         NameOfInstruction = "mkdir";
     }
 
     @Override
-    public boolean StartNeedInstruction(String[] arguments)
-    {
+    public boolean StartNeedInstruction(String[] arguments) {
         Path NeedPath = Paths.get(PresentDirectory.toString(), arguments[1]).toAbsolutePath().normalize();
-        System.out.println(NeedPath.toString());
-        try
-        {
+        try {
             Files.createDirectory(NeedPath);
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             System.err.print(e.getMessage());
             System.exit(1);
         }

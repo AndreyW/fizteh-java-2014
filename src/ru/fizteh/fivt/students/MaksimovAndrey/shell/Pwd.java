@@ -1,7 +1,14 @@
 package ru.fizteh.fivt.students.MaksimovAndrey.shell;
 
-/**
- * Created by andrey on 02.10.14.
- */
-public class Pwd {
+
+public class Pwd extends Instruction {
+    public Pwd() {
+        NameOfInstruction = "pwd";
+    }
+
+    @Override
+    public boolean StartNeedInstruction(String[] arguments) {
+        System.out.println(PresentDirectory.toString());
+        return true;
+    }
 }

@@ -6,8 +6,7 @@ import java.io.IOException;
 
 
 public class Rm extends Instruction {
-    public Rm()
-    {
+    public Rm() {
         NameOfInstruction = "rm";
     }
 
@@ -35,15 +34,12 @@ public class Rm extends Instruction {
     }
 
     @Override
-    public boolean StartNeedInstruction(String[] arguments)
-    {
+    public boolean StartNeedInstruction(String[] arguments) {
         boolean isRecursive = (arguments.length >= 3) && (arguments[1].equals(recursiveFlag));
         String fileName;
-        if (isRecursive)
-        {
+        if (isRecursive) {
             fileName = arguments[2];
-        } else
-        {
+        } else {
             fileName = arguments[1];
         }
 
@@ -51,20 +47,14 @@ public class Rm extends Instruction {
         if (!NeedPath.isAbsolute()) {
             NeedPath = Paths.get(PresentDirectory.toString(), fileName).toAbsolutePath().normalize();
         }
-        if (Files.exists(NeedPath))
-        {
-            try
-            {
+        if (Files.exists(NeedPath)) {
+            try {
                 removeFile(NeedPath, isRecursive);
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 System.err.print(e.getMessage());
                 System.exit(1);
             }
-        } 
-       return true;
+        }
+        return true;
     }
-
-
 }
