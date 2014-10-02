@@ -8,20 +8,20 @@ import java.io.IOException;
 
 public class Cat extends Instruction {
     public Cat() {
-        NameOfInstruction = "cat";
+        nameOfInstruction = "cat";
     }
 
     @Override
-    public boolean StartNeedInstruction(String[] arguments) {
+    public boolean startNeedInstruction(String[] arguments) {
         String fileName = arguments[1];
-        Path NeedPath = Paths.get(fileName);
+        Path needPath = Paths.get(fileName);
 
-        if (!NeedPath.isAbsolute()) {
-            NeedPath = Paths.get(PresentDirectory.toString(), fileName).toAbsolutePath().normalize();
+        if (!needPath.isAbsolute()) {
+            needPath = Paths.get(presentDirectory.toString(), fileName).toAbsolutePath().normalize();
         }
-        if (Files.exists(NeedPath)) {
-            if (!Files.isDirectory(NeedPath)) {
-                try (Scanner scanner = new Scanner(Files.newInputStream(NeedPath))) {
+        if (Files.exists(needPath)) {
+            if (!Files.isDirectory(needPath)) {
+                try (Scanner scanner = new Scanner(Files.newInputStream(needPath))) {
                     while (scanner.hasNextLine()) {
                         System.out.println(scanner.nextLine());
                     }

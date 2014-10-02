@@ -1,13 +1,12 @@
 package ru.fizteh.fivt.students.MaksimovAndrey.shell;
 
 import java.nio.file.*;
-import java.util.Scanner;
 import java.io.IOException;
 
 
 public class Rm extends Instruction {
     public Rm() {
-        NameOfInstruction = "rm";
+        nameOfInstruction = "rm";
     }
 
     public String recursiveFlag = "-r";
@@ -34,7 +33,7 @@ public class Rm extends Instruction {
     }
 
     @Override
-    public boolean StartNeedInstruction(String[] arguments) {
+    public boolean startNeedInstruction(String[] arguments) {
         boolean isRecursive = (arguments.length >= 3) && (arguments[1].equals(recursiveFlag));
         String fileName;
         if (isRecursive) {
@@ -43,13 +42,13 @@ public class Rm extends Instruction {
             fileName = arguments[1];
         }
 
-        Path NeedPath = Paths.get(fileName);
-        if (!NeedPath.isAbsolute()) {
-            NeedPath = Paths.get(PresentDirectory.toString(), fileName).toAbsolutePath().normalize();
+        Path needPath = Paths.get(fileName);
+        if (!needPath.isAbsolute()) {
+            needPath = Paths.get(presentDirectory.toString(), fileName).toAbsolutePath().normalize();
         }
-        if (Files.exists(NeedPath)) {
+        if (Files.exists(needPath)) {
             try {
-                removeFile(NeedPath, isRecursive);
+                removeFile(needPath, isRecursive);
             } catch (IOException e) {
                 System.err.print(e.getMessage());
                 System.exit(1);

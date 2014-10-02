@@ -3,16 +3,15 @@ package ru.fizteh.fivt.students.MaksimovAndrey.shell;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-abstract public class Instruction
-{
-    protected String NameOfInstruction;
-    protected static Path PresentDirectory = Paths.get("").toAbsolutePath().normalize();
+public abstract class Instruction {
+    protected String nameOfInstruction;
+    protected static Path presentDirectory = Paths.get("").toAbsolutePath().normalize();
 
-    abstract public boolean StartNeedInstruction(String[] arguments);
+    public abstract boolean startNeedInstruction(String[] arguments);
 
     @Override
-    final public String toString()
-    {
-        return NameOfInstruction;
+    public final String toString() {
+        return nameOfInstruction;
     }
 }
+

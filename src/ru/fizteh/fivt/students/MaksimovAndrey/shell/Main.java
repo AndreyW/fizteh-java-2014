@@ -2,17 +2,17 @@ package ru.fizteh.fivt.students.MaksimovAndrey.shell;
 
 public class Main {
     public static void main(String[] args) {
-        Shell WShell = new Shell();
+        Shell wShell = new Shell();
 
-        boolean Check = true;
+        boolean check = true;
 
         if (args.length != 0) {
-            Check = WShell.batch(args);
+            check = wShell.batch(args);
         } else {
-            Check = WShell.interactive();
+            check = wShell.interactive();
         }
 
-        if (Check == false) {
+        if (!check) {
             System.exit(1);
         } else {
             System.exit(0);

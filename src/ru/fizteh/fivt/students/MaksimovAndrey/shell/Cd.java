@@ -6,25 +6,25 @@ import java.nio.file.Path;
 
 public class Cd extends Instruction {
     public Cd() {
-        NameOfInstruction = "cd";
+        nameOfInstruction = "cd";
     }
 
     @Override
-    public boolean StartNeedInstruction(String[] arguments) {
+    public boolean startNeedInstruction(String[] arguments) {
         if (arguments.length == 1) {
-            PresentDirectory = Paths.get("").toAbsolutePath().normalize();
+            presentDirectory = Paths.get("").toAbsolutePath().normalize();
             return true;
         }
 
-        Path NeedAbsolutePath = Paths.get(arguments[1]);
+        Path needAbsolutePath = Paths.get(arguments[1]);
 
-        if (!NeedAbsolutePath.isAbsolute()) {
-            NeedAbsolutePath = Paths.get(PresentDirectory.toString(), arguments[1]).toAbsolutePath().normalize();
+        if (!needAbsolutePath.isAbsolute()) {
+            needAbsolutePath = Paths.get(presentDirectory.toString(), arguments[1]).toAbsolutePath().normalize();
         }
-        System.out.println(NeedAbsolutePath.toString());
+        System.out.println(needAbsolutePath.toString());
 
-        if (Files.exists(NeedAbsolutePath) && Files.isDirectory(NeedAbsolutePath)) {
-            PresentDirectory = NeedAbsolutePath;
+        if (Files.exists(needAbsolutePath) && Files.isDirectory(needAbsolutePath)) {
+            presentDirectory = needAbsolutePath;
         } else {
             System.out.println("ERROR: No such Directory or File");
         }

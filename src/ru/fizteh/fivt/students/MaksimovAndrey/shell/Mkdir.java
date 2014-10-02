@@ -9,14 +9,14 @@ import java.io.IOException;
 
 public class Mkdir extends Instruction {
     public Mkdir() {
-        NameOfInstruction = "mkdir";
+        nameOfInstruction = "mkdir";
     }
 
     @Override
-    public boolean StartNeedInstruction(String[] arguments) {
-        Path NeedPath = Paths.get(PresentDirectory.toString(), arguments[1]).toAbsolutePath().normalize();
+    public boolean startNeedInstruction(String[] arguments) {
+        Path needPath = Paths.get(presentDirectory.toString(), arguments[1]).toAbsolutePath().normalize();
         try {
-            Files.createDirectory(NeedPath);
+            Files.createDirectory(needPath);
         } catch (IOException e) {
             System.err.print(e.getMessage());
             System.exit(1);

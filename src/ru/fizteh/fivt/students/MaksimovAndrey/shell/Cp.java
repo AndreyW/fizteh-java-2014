@@ -2,71 +2,55 @@ package ru.fizteh.fivt.students.MaksimovAndrey.shell;
 
 import java.nio.file.*;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.io.IOException;
 import static java.nio.file.StandardCopyOption.*;
 
-public class Cp extends Instruction
-{
-    public Cp()
-    {
-        NameOfInstruction = "cp";
+public class Cp extends Instruction {
+    public Cp() {
+        nameOfInstruction = "cp";
     }
 
     public String recursiveFlag = "-r";
 
-    public void copyFile(final Path SourcePath, final Path DestinationPath, final boolean isRecursive) throws IOException
-    {
-        if (!Files.isDirectory(SourcePath))
-        {
-            Files.copy(SourcePath, DestinationPath, REPLACE_EXISTING);
-        }
-        else if (isRecursive)
-        {
-            Files.copy(SourcePath, DestinationPath, REPLACE_EXISTING);
-            try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(SourcePath))
-            {
-                for (Path entryPath : directoryStream)
-                {
-                    copyFile(entryPath, DestinationPath.resolve(entryPath.getFileName()).normalize(), isRecursive);
+    public void copyFile(final Path sourcePath, final Path destinationPath, final boolean isRecursive)
+            throws IOException {
+        if (!Files.isDirectory(sourcePath)) {
+            Files.copy(sourcePath, destinationPath, REPLACE_EXISTING);
+        } else if (isRecursive) {
+            Files.copy(sourcePath, destinationPath, REPLACE_EXISTING);
+            try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(sourcePath)) {
+                for (Path entryPath : directoryStream) {
+                    copyFile(entryPath, destinationPath.resolve(entryPath.getFileName()).normalize(), isRecursive);
                 }
             }
-        } else
-        {
-            throw new DirectoryNotEmptyException(SourcePath.getFileName() + " is a directory (not copied).");
+        } else {
+            throw new DirectoryNotEmptyException(sourcePath.getFileName() + " is a directory (not copied).");
         }
     }
 
     @Override
-    public boolean StartNeedInstruction(String[] arguments)
-    {
+    public boolean startNeedInstruction(String[] arguments) {
         boolean isRecursive = (arguments.length >= 4) && (arguments[1].equals(recursiveFlag));
 
-        String SourceFileName;
-        String DestinationFileName;
+        String sourceFileName;
+        String destinationFileName;
 
-        if (isRecursive)
-        {
-            SourceFileName = arguments[2];
-            DestinationFileName = arguments[3];
+        if (isRecursive) {
+            sourceFileName = arguments[2];
+            destinationFileName = arguments[3];
+        } else {
+            sourceFileName = arguments[1];
+            destinationFileName = arguments[2];
         }
-        else
-        {
-            SourceFileName = arguments[1];
-            DestinationFileName = arguments[2];
-        }
-        Path SourcePath = PresentDirectory.resolve(SourceFileName).normalize();
-        Path DestinationPath = PresentDirectory.resolve(DestinationFileName).resolve(SourcePath.getFileName()).normalize();
+        Path sourcePath = presentDirectory.resolve(sourceFileName).normalize();
+        Path destinationPath =
+                presentDirectory.resolve(destinationFileName).resolve(sourcePath.getFileName()).normalize();
 
-        if (Files.exists(SourcePath))
-        {
-            try
-            {
-                copyFile(SourcePath, DestinationPath, isRecursive);
-            }
-            catch (IOException e)
-            {
+        if (Files.exists(sourcePath)) {
+            try {
+                copyFile(sourcePath, destinationPath, isRecursive);
+            } catch (IOException e) {
                 System.err.print(e.getMessage());
                 System.exit(1);
             }

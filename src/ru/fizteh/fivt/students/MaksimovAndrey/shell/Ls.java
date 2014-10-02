@@ -8,12 +8,12 @@ import java.nio.file.DirectoryStream;
 
 public class Ls extends Instruction {
     public Ls() {
-        NameOfInstruction = "ls";
+        nameOfInstruction = "ls";
     }
 
     @Override
-    public boolean StartNeedInstruction(String[] arguments) {
-        try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(PresentDirectory)) {
+    public boolean startNeedInstruction(String[] arguments) {
+        try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(presentDirectory)) {
             for (Path entry : directoryStream) {
                 Path filePath = entry.getFileName();
                 if (!Files.isHidden(filePath)) {
