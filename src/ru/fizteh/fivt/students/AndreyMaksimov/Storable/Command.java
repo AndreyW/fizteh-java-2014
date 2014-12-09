@@ -9,6 +9,7 @@ public abstract class Command {
         ARRAY_OF_COMMANDS = new HashMap<>();
         ARRAY_OF_COMMANDS.put("get", new GetSt());
         ARRAY_OF_COMMANDS.put("put", new PutSt());
+        ARRAY_OF_COMMANDS.put("use", new UseSt());
         ARRAY_OF_COMMANDS.put("drop", new DropSt());
         ARRAY_OF_COMMANDS.put("list", new ListSt());
         ARRAY_OF_COMMANDS.put("exit", new ExitSt());
@@ -59,7 +60,7 @@ public abstract class Command {
             }
         }
 
-        String[] tokens = needString.split("\\s+, 0");
+        String[] tokens = needString.split("\\s+");
         if (ARRAY_OF_COMMANDS.containsKey(tokens[0])) {
             Command command = ARRAY_OF_COMMANDS.get(tokens[0]);
             if (tokens.length - 1 != command.numberOfArguments()) {
