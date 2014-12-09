@@ -1,7 +1,5 @@
 package ru.fizteh.fivt.students.MaksimovAndrey.Storable;
 
-import ru.fizteh.fivt.students.MaksimovAndrey.Storable.structured.Storeable;
-
 public class GetSt extends Command {
 
     String key;
@@ -11,12 +9,14 @@ public class GetSt extends Command {
         if (base.getUsing() == null) {
             System.out.println("no table");
         } else {
-            Storeable value = base.getUsing().get(key);
+            StoreableValue value = (StoreableValue) base.getUsing().get(key);
             if (value == null) {
                 System.out.println("not found");
             } else {
                 System.out.println("found");
-                System.out.println(base.serialize(base.getUsing(), value));
+                for (Object i : value.getValues()) {
+                    System.out.println(i + " ");
+                }
             }
         }
     }
